@@ -1,9 +1,12 @@
 package com.day0.addressbook;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 class Contacts {
 	String firstName, lastName, address, city, state;
@@ -42,6 +45,7 @@ public class AddressBook {
 			System.out.println("1.ADD");
 			System.out.println("2.EDIT");
 			System.out.println("3.DELETE");
+			System.out.println("4.SORTBYPERSONNAME");
 			int num = input.nextInt();
 			switch (num) {
 			case 1:
@@ -52,6 +56,9 @@ public class AddressBook {
 				break;
 			case 3:
 				delete();
+				break;
+			case 4:
+				sortbypersonName();
 				break;
 			default:
 				System.out.println("Invalid");
@@ -123,5 +130,11 @@ public class AddressBook {
 		String firstName = input.next();
 		hashmap.remove(firstName);
 	}
-
+   
+	public static void sortbypersonName() {
+		 Map< String,Contacts> map = new TreeMap<String, Contacts>(hashmap); 
+		 for (Entry<String, Contacts> entry : map.entrySet()) {
+		      System.out.println(entry);
+	}
+}
 }
