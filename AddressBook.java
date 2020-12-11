@@ -72,6 +72,11 @@ public class AddressBook {
 		while(true) {
 		System.out.println("enter firstname");
 		String firstName = input.next();
+		if(hashmap.containsKey(firstName)) {
+			System.out.println("Already sameName is present in the entries");
+			System.out.println("you're tried to add duplicate entry");
+			break;
+		}
 		System.out.println("enter lastname");
 		String lastName = input.next();
 		System.out.println("enter address");
