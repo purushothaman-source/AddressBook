@@ -40,6 +40,7 @@ public class AddressBook {
 		System.out.println("choose the operation which u want to perform");
 		System.out.println("1.ADD");
 		System.out.println("2.EDIT");
+		System.out.println("3.DELETE");
 		int num = input.nextInt();
 		switch (num) {
 		case 1:
@@ -47,6 +48,9 @@ public class AddressBook {
 			break;
 		case 2:
 			edit();
+			break;
+		case 3:
+			delete();
 			break;
 		default:
 			System.out.println("Invalid");
@@ -79,7 +83,7 @@ public class AddressBook {
 		hashmap.put(firstName, new Contacts(firstName, lastName, address, city, state, zip, phoneNumber));
 	}
 
-	static void edit() {
+	public static void edit() {
 		System.out.println("ENTER THE FIRSTNAME WHICH YOU WANT TO EDIT");
 		System.out.println("enter firstname");
 		String firstName = input.next();
@@ -98,5 +102,10 @@ public class AddressBook {
 		hashmap.replace(firstName, new Contacts(firstName, lastName, address, city, state, zip, phoneNumber));
 
 	}
+  public static void delete() { 	
+	  System.out.println("enter the firstname to delete");
+	  String firstName = input.next();
+	  hashmap.remove(firstName);
+  }
 
 }
