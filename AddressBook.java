@@ -1,8 +1,6 @@
 package com.day0.addressbook;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -68,7 +66,7 @@ class Contacts  {
 }
 
 //main class
-public class AddressBook  {
+public class AddressBook extends Sorting {
 	// main method
 	static ArrayList<Contacts> arraylist = new ArrayList<>();
 	static Scanner input = new Scanner(System.in);
@@ -99,16 +97,16 @@ public class AddressBook  {
 				delete();
 				break;
 			case 4:
-				sortbypersonName();
+				Sorting.sortbypersonName();
 				break;
 			case 5:
-				sortbyzip();
+				Sorting.sortbyzip();
 				break;
 			case 6:
-				sortbycity();
+				Sorting.sortbycity();
 				break;
 			case 7:
-				sortbystate();
+				Sorting.sortbystate();
 				break;
 			case 8:
 				displayInfo();
@@ -205,48 +203,28 @@ public class AddressBook  {
 		
 	}
    
-	public static void sortbypersonName() {
-		  Comparator<Contacts> cm2=Comparator.comparing(Contacts::getFirstName);  
-		   Collections.sort(arraylist,cm2);  
-		      System.out.println("Sorting by personName>>>>>");  
-		      for(Contacts st: arraylist){  
-		        System.out.println(st);  
-		        System.out.println("*************************");
-		        }    
-		      
-	}
+	
 
-	public static void sortbyzip() {
-		 Comparator<Contacts> cm2=Comparator.comparing(Contacts::getZip);  
-		   Collections.sort(arraylist,cm2);  
-		      System.out.println("Sorting by zip>>>>>>>>>>");  
-		      for(Contacts st: arraylist){  
-		        System.out.println(st);  
-		        System.out.println("********************");
-	}
-}
-	public static void sortbycity() {
-		 Comparator<Contacts> cm2=Comparator.comparing(Contacts::getCity);  
-		   Collections.sort(arraylist,cm2);  
-		      System.out.println("Sorting by city>>>>>>>>>");  
-		      for(Contacts st: arraylist){  
-		        System.out.println(st); 
-		        System.out.println("**********************");
-	}
-}
-	public static void sortbystate() {
-		 Comparator<Contacts> cm2=Comparator.comparing(Contacts::getState);  
-		   Collections.sort(arraylist,cm2);  
-		      System.out.println("Sorting by state>>>>>>>>>>");  
-		      for(Contacts st: arraylist){  
-		        System.out.println(st);  
-		        System.out.println("********************");
-	}
- }
+
 	public static void displayInfo() {
 		for(Contacts au:arraylist) {
 			System.out.println(au);
 		}
 		
 	}
+	public static void searchbycity() {
+		String city = input.next();
+		boolean flag=false;
+		for (Contacts au:arraylist) {
+			if (au.city.equals(city)) {
+			   System.out.println(au);
+			   flag=true;
+			}
+		
+		}
+		if(flag==false)
+			System.out.println("NO RECORDS FOUND");
+		
+	}
 }
+	
