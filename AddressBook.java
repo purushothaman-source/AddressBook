@@ -1,8 +1,6 @@
 package com.day0.addressbook;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
 
 class Contacts  {
 	String firstName, lastName, address, city, state;
@@ -57,8 +55,8 @@ class Contacts  {
 
 	@Override
 	public String toString() {
-		return " firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + "]";
+		return " firstName=" + firstName + ",		lastName=" + lastName + ",		address=" + address + ",		city=" + city
+				+ ",		state=" + state + ",		zip=" + zip + ",		phoneNumber=" + phoneNumber ;
 	}
 
 	
@@ -66,16 +64,23 @@ class Contacts  {
 }
 
 //main class
-public class AddressBook extends Sorting {
+public class AddressBook extends AddressBookOperations  {
 	// main method
-	static ArrayList<Contacts> arraylist = new ArrayList<>();
 	static Scanner input = new Scanner(System.in);
-	//static HashMap<String, Contacts> hashmap = new HashMap<String, Contacts>();
-
+   
 	public static void main(String[] args) {
 		System.out.println("Welcome to AddressBook");
+		
+		 IAddressBookService service=new AddressBookOperations();
+		 
+		 arraylist.add( new Contacts("purushoth", "kabaddi"," address","chennai", "tamilnadu", 607003, 9488806205l));
+		 arraylist.add( new Contacts("babu", "Sail"," address","mumbai", "maharastra", 607007, 9488806205l));
+		 arraylist.add( new Contacts("appu", "Jana"," address","bangalore", "karnataka", 607403, 9488806205l));
+		 arraylist.add( new Contacts("seetha", "lakshmi"," address","pune", "maharastra", 607083, 9488806205l));
+		 arraylist.add( new Contacts("siva", "nantham"," address","kolkata", "west bengal", 607903, 9488806205l));
+		 
 		while (true) {
-			System.out.println("choose the operation which you want to perform");
+			System.out.println(">>>>>>>>CHOOSE THE OPERATION<<<<<<<<<<");
 			System.out.println("1.ADD");
 			System.out.println("2.EDIT");
 			System.out.println("3.DELETE");
@@ -84,38 +89,43 @@ public class AddressBook extends Sorting {
 			System.out.println("6.SORTBYCITY");
 			System.out.println("7.SORTBYSTATE");
 			System.out.println("8.DISPLAY INFO");
+			System.out.println("9.SEARCH BY CITY");
 			System.out.println("-----------------------------------");
 			int num = input.nextInt();
 			switch (num) {
 			case 1:
-				add();
+				service.add();
 				break;
 			case 2:
-				edit();
+				service.edit();
 				break;
 			case 3:
-				delete();
+				service.delete();
 				break;
 			case 4:
-				Sorting.sortbypersonName();
+				service.sortbypersonName();
 				break;
 			case 5:
-				Sorting.sortbyzip();
+				service.sortbyzip();
 				break;
 			case 6:
-				Sorting.sortbycity();
+				service.sortbycity();
 				break;
 			case 7:
-				Sorting.sortbystate();
+				service.sortbystate();
 				break;
 			case 8:
-				displayInfo();
+				service.displayInfo();
+				break;
+			case 9:
+				service.Searchbycity();
 				break;
 			default:
 				System.out.println("Invalid");
 			}
-			System.out.println("Do you want to perform any other operations: press(1?0)");
-			System.out.println("0 for continue and 1 for stop");
+			System.out.println("ANY OTHER OPERATION>>>>: PRESS(0?1)");
+			System.out.println("0 -->>YES");
+			System.out.println("1 -->> NO");
 			int number = input.nextInt();
 			if (number == 1)
 				break;
@@ -123,108 +133,6 @@ public class AddressBook extends Sorting {
 		
 	}
 
-	public static void add() {
-		
-		System.out.println("enter firstname");
-		String firstName = input.next();
-		for (Contacts au:arraylist) {
-			if (au.firstName.equals(firstName)) {
-				System.out.println("Duplicate entry");
-				return;
-			}
-		}
-		
-		System.out.println("enter lastname");
-		String lastName = input.next();
-		System.out.println("enter address");
-		String address = input.next();
-		System.out.println("enter city");
-		String city = input.next();
-		System.out.println("enter state");
-		String state = input.next();
-		System.out.println("enter zip");
-		long zip = input.nextLong();
-		System.out.println("enter phone number");
-		long phoneNumber = input.nextLong();
-        arraylist.add( new Contacts(firstName, lastName, address, city, state, zip, phoneNumber));
-        System.out.println("*****ADDED SUCCESSFULLY*******");  
-		}
-
-	public static void edit() {
-		boolean flag=false;
-		System.out.println("ENTER THE FIRSTNAME WHICH YOU WANT TO EDIT");
-		System.out.println("enter firstname");
-		String firstName = input.next();
-		for (Contacts au:arraylist) {
-			if (au.firstName.equals(firstName)) {
-			   flag=true;
-			   arraylist.remove(au);
-				break;
-			}
-		}
-		if(flag==true) {
-		System.out.println("enter lastname");
-		String lastName = input.next();
-		System.out.println("enter address");
-		String address = input.next();
-		System.out.println("enter city");
-		String city = input.next();
-		System.out.println("enter state");
-		String state = input.next();
-		System.out.println("enter zip");
-		long zip = input.nextLong();
-		System.out.println("enter phone number");
-		long phoneNumber = input.nextLong();
-		arraylist.add( new Contacts(firstName, lastName, address, city, state, zip, phoneNumber));
-		System.out.println("******EDITED SUCCESSFULLY*******");
-		}
-		else {
-			System.out.println("no records found");
-		}
-
-	}
-
-	public static void delete() {
-		System.out.println("enter the firstname to delete");
-		boolean flag=false;
-		String firstName = input.next();
-		for (Contacts au:arraylist) {
-			if (au.firstName.equals(firstName)) {
-			   arraylist.remove(au);
-			   System.out.println("DELETED SUCCESSFULLY");
-			   flag=true;
-				return;
-			}
-		
-		}
-	    if(flag==false)
-	    	System.out.println("NO RECORDS FOUND TO DELETE");
-		
-		
-	}
-   
 	
-
-
-	public static void displayInfo() {
-		for(Contacts au:arraylist) {
-			System.out.println(au);
-		}
-		
-	}
-	public static void searchbycity() {
-		String city = input.next();
-		boolean flag=false;
-		for (Contacts au:arraylist) {
-			if (au.city.equals(city)) {
-			   System.out.println(au);
-			   flag=true;
-			}
-		
-		}
-		if(flag==false)
-			System.out.println("NO RECORDS FOUND");
-		
-	}
 }
-	
+
